@@ -1,0 +1,36 @@
+GET  http://localhost:3000/
+
+###
+
+POST  http://localhost:3000/product
+Content-Type: application/json
+
+{
+    "name": "product 8",
+    "description": "product 8 description",
+    "price": 1200
+}
+
+###
+
+GET http://localhost:3000/products/2/1
+
+###
+
+POST http://localhost:3000/order
+Content-Type: application/json
+
+{
+    "products": [
+        {"product": "6687dd5c7e3271edf926a25f",
+        "itemCount": 1,
+        "totalPrice": 5000},
+        {"product": "6687de437e3271edf926a261",
+        "itemCount": 4,
+        "totalPrice": 8000}
+    ]
+}
+
+###
+
+GET  http://localhost:3000/orders
