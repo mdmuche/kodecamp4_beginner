@@ -1,0 +1,50 @@
+GET   http://localhost:4000/products
+
+###
+
+POST  http://localhost:4000/products
+Content-Type: application/json
+
+{
+    "productName": "private hatch",
+    "productPrice": 10
+}
+
+###
+
+GET   http://localhost:4000/products/66756487641b7f6cfa25c65a
+
+###
+
+PUT    http://localhost:4000/products/6675642fb30503ea3d615b21
+Content-Type: application/json
+
+{
+    "productName": "tea updated",
+    "productPrice": 800000
+}
+
+###
+
+DELETE    http://localhost:4000/products/6675642fb30503ea3d615b21
+
+###
+
+POST  http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "fulName": "abula martins",
+    "email": "abulamartins@gmail.com",
+    "password": "test123",
+}
+
+###
+
+POST  http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "abulamartins@gmail.com",
+    "password": "test123",
+}

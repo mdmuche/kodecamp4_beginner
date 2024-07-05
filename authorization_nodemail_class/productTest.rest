@@ -1,0 +1,45 @@
+##eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjgyYjQzZGM0NTVmNWVkN2JiNGNjZDkiLCJlbWFpbCI6ImFidWxhbWFydGluc0BnbWFpbC5jb20iLCJpYXQiOjE3MTk4NDE4OTF9.r5HL9SCN-dk1akr61ESoojMMCHxpcf81pF9UHelnsgk
+
+##eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjgyYjRmMWM0NTVmNWVkN2JiNGNjZTAiLCJlbWFpbCI6ImFidWxhY2hpem9yQGdtYWlsLmNvbSIsImlhdCI6MTcxOTg0MjA2Nn0.Jg2BjwEtJGdd3_V9iwXwhs0C5VeSZQHsWlUnSUU_LC8
+
+POST http://localhost:3000/product/product
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjgyYjRmMWM0NTVmNWVkN2JiNGNjZTAiLCJlbWFpbCI6ImFidWxhY2hpem9yQGdtYWlsLmNvbSIsImlhdCI6MTcxOTg0MjA2Nn0.Jg2BjwEtJGdd3_V9iwXwhs0C5VeSZQHsWlUnSUU_LC8
+
+{
+    "name": "goat",
+    "description": "goat to see",
+    "price": 4000
+}
+
+###
+
+GET  http://localhost:3000/product/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjgyYjRmMWM0NTVmNWVkN2JiNGNjZTAiLCJlbWFpbCI6ImFidWxhY2hpem9yQGdtYWlsLmNvbSIsImlhdCI6MTcxOTg0MjA2Nn0.Jg2BjwEtJGdd3_V9iwXwhs0C5VeSZQHsWlUnSUU_LC8
+
+###
+
+DELETE http://localhost:3000/product/6682b9c45ae82fad9533b51a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjgyYjRmMWM0NTVmNWVkN2JiNGNjZTAiLCJlbWFpbCI6ImFidWxhY2hpem9yQGdtYWlsLmNvbSIsImlhdCI6MTcxOTg0MjA2Nn0.Jg2BjwEtJGdd3_V9iwXwhs0C5VeSZQHsWlUnSUU_LC8
+
+
+POST  http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "fullName": "abula experience",
+    "email": "abulachizor@gmail.com",
+    "password": "test123"
+}
+
+###
+
+
+POST  http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "abulachizor@gmail.com",
+    "password": "test123"
+}

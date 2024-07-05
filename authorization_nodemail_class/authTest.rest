@@ -1,0 +1,19 @@
+POST  http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "fullName": "abula experience",
+    "email": "abulachizor@gmail.com",
+    "password": "test123"
+}
+
+###
+
+
+POST  http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "abulachizor@gmail.com",
+    "password": "test123"
+}
