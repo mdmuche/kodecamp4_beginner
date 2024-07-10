@@ -7,17 +7,32 @@ const rolesAllowed = require("../middleware/roleBasedAuth");
 var router = express.Router();
 
 router.use(verifyAuth);
-router.use(rolesAllowed(["users"]));
+router.use(rolesAllowed(["user"]));
 
-router.get("/quiz/:quizNumber", function (req, res, next) {
-  const { quizNumber } = req.params;
-  const quiz = quizModel.findOne({ questionNumber: quizNumber });
+router.get("/quiz/:quizNumber", async function (req, res, next) {
+  const { quizNumber: questionNumber } = req.params;
+  const quiz = await quizModel.findOne(
+    { questionNumber },
+    "-correctOption -createdAt -updatedAt"
+  );
 
   res.send({ quiz });
 });
 
 router.post("/answer-a-question", async function (req, res, next) {
   const { quiz, optionChosen } = req.body;
+
+  const questionAlreadyAnswered = await activeQuizModel.exists({
+    user: req.userDetails.userId,
+    quiz,
+  });
+
+  if (questionAlreadyAnswered) {
+    res
+      .status(400)
+      .send({ message: "this message has already been answered by you" });
+    return;
+  }
 
   await activeQuizModel.create({
     quiz,
@@ -64,6 +79,14 @@ router.post("/mark-quiz", async function (req, res, next) {
     totalCorrectQuestion,
     totalIncorrectQuestion,
   });
+});
+
+router.get("/quiz-history", async (req, res, next) => {
+  try {
+  } catch (err) {
+    console.error("an error occured", err.message);
+    next(err);
+  }
 });
 
 module.exports = router;

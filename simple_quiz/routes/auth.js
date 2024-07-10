@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken");
 router.post("/register", async function (req, res, next) {
   const { fullName, email, password } = req.body;
 
+  console.log(req.body);
+
   const hashedPassword = bcrypt.hashSync(password, 10);
 
   await userModel.create({
@@ -23,7 +25,7 @@ router.post("/register", async function (req, res, next) {
 router.post("/login", async function (req, res, next) {
   const { email, password } = req.body;
 
-  const userDetails = userModel.findOne({ email });
+  const userDetails = await userModel.findOne({ email });
 
   if (!userDetails) {
     res.status(404).send({
@@ -32,12 +34,14 @@ router.post("/login", async function (req, res, next) {
     return;
   }
 
-  const passwordMatch = bcrypt.compareSync(password, userDetails);
+  const passwordMatch = bcrypt.compareSync(password, userDetails.password);
 
   if (!passwordMatch) {
     res.status(404).send({
       message: "invalid credentials",
     });
+
+    return;
   }
 
   const token = jwt.sign(

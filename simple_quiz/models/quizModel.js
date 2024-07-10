@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const quizSchema = new mongoose.Schema(
   {
@@ -44,6 +45,8 @@ const quizSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+quizSchema.plugin(mongoosePaginate);
 
 const quizModel = mongoose.model("quiz", quizSchema);
 

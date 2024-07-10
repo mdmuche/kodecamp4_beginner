@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const quizHistorySchema = new mongoose.Schema(
   {
@@ -26,6 +27,8 @@ const quizHistorySchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+quizHistorySchema.plugin(mongoosePaginate);
 
 const quizHistoryModel = mongoose.model("quizHistory", quizHistorySchema);
 

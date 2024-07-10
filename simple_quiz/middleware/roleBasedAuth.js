@@ -1,5 +1,5 @@
-const rolesAllowed = async (roles) => {
-  return async (req, res, next) => {
+const rolesAllowed = (roles) => {
+  return (req, res, next) => {
     if (roles.includes(req.userDetails.role)) {
       next();
     } else {

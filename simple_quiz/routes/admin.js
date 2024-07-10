@@ -5,14 +5,22 @@ const verifyAuth = require("../middleware/verifyAuth");
 const rolesAllowed = require("../middleware/roleBasedAuth");
 
 router.use(verifyAuth);
-router.use(rolesAllowed(["admins"]));
+router.use(rolesAllowed(["admin"]));
 
 router.post("/quiz", async function (req, res, next) {
-  const { question, optionA, optionB, optionC, optionD, correctOption } =
-    req.body;
-  await quizModel.create({
-    question,
+  const {
     questionNumber,
+    question,
+    optionA,
+    optionB,
+    optionC,
+    optionD,
+    correctOption,
+  } = req.body;
+
+  await quizModel.create({
+    questionNumber,
+    question,
     optionA,
     optionB,
     optionC,
@@ -37,6 +45,41 @@ router.get("/quiz-by-id/:id", async (req, res, next) => {
   const quiz = await quizModel.findById(id);
 
   res.send({ quiz });
+});
+
+router.put("/quiz/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const {
+      questionNumber,
+      question,
+      optionA,
+      optionB,
+      optionC,
+      optionD,
+      correctOption,
+    } = req.body;
+
+    const updatedQuiz = await quizModel.findByIdAndUpdate(
+      id,
+      {
+        questionNumber,
+        question,
+        optionA,
+        optionB,
+        optionC,
+        optionD,
+        correctOption,
+      },
+      { new: true }
+    );
+
+    res.send({ message: "quiz updated successfully!", updatedQuiz });
+  } catch (err) {
+    console.error("an error occurred", err.message);
+    next(err);
+  }
 });
 
 module.exports = router;
