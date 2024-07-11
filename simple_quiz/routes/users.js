@@ -43,6 +43,40 @@ router.post("/answer-a-question", async function (req, res, next) {
   res.send({ message: "Answer recorded" });
 });
 
+router.get("/unanswered-question-number", async (req, res, next) => {
+  try {
+    const answeredQuiz = await activeQuizModel
+      .find({ user: req.userDetails.userId })
+      .populate("quiz", "questionNumber");
+
+    const answeredNumber = answeredQuiz.map((q) => q.quiz.questionNumber);
+    const totalQuestions = await quizModel.countDocuments({});
+    console.log(totalQuestions);
+    const unAnsweredQuestion = [];
+
+    for (let i = 1; i <= totalQuestions; i++) {
+      if (answeredNumber.includes(i)) {
+        unAnsweredQuestion.push({
+          questionNumber: i,
+          state: "answered",
+        });
+      } else {
+        unAnsweredQuestion.push({
+          questionNumber: i,
+          state: "unanswered",
+        });
+      }
+    }
+
+    res.send({
+      unAnsweredQuestion,
+    });
+  } catch (err) {
+    console.error("an error ocured", err.message);
+    next(err);
+  }
+});
+
 router.post("/mark-quiz", async function (req, res, next) {
   const activeQuiz = await activeQuizModel
     .find({ user: req.userDetails.userId })
@@ -83,6 +117,23 @@ router.post("/mark-quiz", async function (req, res, next) {
 
 router.get("/quiz-history", async (req, res, next) => {
   try {
+    const result = await quizHistoryModel.paginate({
+      user: req.userDetails.userId,
+    });
+
+    res.send({ result });
+  } catch (err) {
+    console.error("an error occured", err.message);
+    next(err);
+  }
+});
+
+router.get("/quiz-history/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await quizHistoryModel.findById(id);
+
+    res.send({ result });
   } catch (err) {
     console.error("an error occured", err.message);
     next(err);
