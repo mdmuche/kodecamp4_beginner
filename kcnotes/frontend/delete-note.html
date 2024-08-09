@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      body {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        text-align: center;
+      }
+    </style>
+
+    <main>
+      <div>Are you sure you want to delete this note?</div>
+      <div>
+        <button
+          style="
+            background-color: red;
+            color: black;
+            border: none;
+            border-radius: 5px;
+          "
+          onclick="handleDelete()"
+        >
+          Yes
+        </button>
+        <button
+          style="
+            background-color: green;
+            color: whitesmoke;
+            border: none;
+            border-radius: 5px;
+          "
+          onclick="location.assign('/frontend/dashboard.html')"
+        >
+          No
+        </button>
+      </div>
+    </main>
+
+    <script src="./script/setup-script.js"></script>
+    <script>
+      async function handleDelete() {
+        try {
+          const id = location.search.slice(4);
+
+          const response = await fetch(urlMaker("/note/" + id), {
+            method: "DELETE",
+            headers: {
+              Authorization: getToken(),
+            },
+          });
+
+          if (response.status == 200) {
+            alert("note deleted successfully!");
+            location.assign("/frontend/dashboard.html");
+          }
+        } catch (error) {
+          console.error(error);
+          alert("an error occured");
+        }
+      }
+    </script>
+  </body>
+</html>

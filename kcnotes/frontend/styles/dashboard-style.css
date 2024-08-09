@@ -1,0 +1,65 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 80px;
+}
+
+header > div {
+  display: flex;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+header > div > button,
+#view-button,
+#edit-button,
+#delete-button {
+  border: none;
+  background-color: black;
+  color: whitesmoke;
+  border-radius: 8px;
+  border: 1px solid red;
+  padding: 5px 10px;
+}
+header > div > button:hover {
+  background-color: red;
+  color: whitesmoke;
+  border: 1px solid green;
+}
+
+.no-note {
+  margin-top: 40px;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: whitesmoke;
+  background-color: black;
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 5px 10px;
+}
+
+.single-note {
+  border: 1px solid red;
+  background-color: black;
+  color: whitesmoke;
+  border-radius: 12px;
+  padding: 10px 15px;
+}
+
+.view-edit-delete-button {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+.view-edit-delete-button > button {
+  width: 100%;
+}
+
+#delete-button {
+  background-color: red !important;
+}

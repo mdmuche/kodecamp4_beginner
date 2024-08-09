@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/addnote-style.css" />
+  </head>
+  <body>
+    <div>
+      <h3 style="text-align: center">Edit a note</h3>
+      <input type="text" id="title" placeholder="type in your title" />
+      <textarea placeholder="type in a note" id="body" rows="10"></textarea>
+      <button id="editNoteButton">Edit Note</button>
+      <button
+        onclick="history.back()"
+        style="
+          color: green;
+          background-color: black;
+          border: none;
+          border-radius: 8px;
+        "
+      >
+        back
+      </button>
+    </div>
+
+    <script src="./script/setup-script.js"></script>
+    <script src="./script/edit-note-script.js"></script>
+  </body>
+</html>

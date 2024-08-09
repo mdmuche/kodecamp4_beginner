@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+    </style>
+
+    <main></main>
+
+    <script src="./script/setup-script.js"></script>
+    <script>
+      const mainArea = document.querySelector("main");
+
+      async function loadNote() {
+        const id = location.search.slice(4);
+        console.log(id);
+        const response = await fetch(urlMaker("/note/" + id), {
+          method: "GET",
+          headers: {
+            Authorization: getToken(),
+          },
+        });
+
+        const data = await response.json();
+
+        console.log(data);
+
+        mainArea.innerHTML = `
+        <div style="font-weight: bold;">${data.note.title}</div>
+        <div>${data.note.body}</div>
+        <div style='text-align: center'>
+        <button onclick="location.assign('/frontend/edit-note.html?id=' + '${data.note._id}')">Edit</button>
+        </div>
+        `;
+      }
+
+      loadNote();
+    </script>
+  </body>
+</html>
