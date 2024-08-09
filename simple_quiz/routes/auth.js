@@ -7,8 +7,6 @@ const jwt = require("jsonwebtoken");
 router.post("/register", async function (req, res, next) {
   const { fullName, email, password } = req.body;
 
-  console.log(req.body);
-
   const hashedPassword = bcrypt.hashSync(password, 10);
 
   await userModel.create({

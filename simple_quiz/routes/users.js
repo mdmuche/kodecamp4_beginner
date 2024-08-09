@@ -9,6 +9,23 @@ var router = express.Router();
 router.use(verifyAuth);
 router.use(rolesAllowed(["user"]));
 
+router.get("/emit-an-event", (req, res) => {
+  try {
+    req.io
+      .to(req.userDetails.userId)
+      .emit(
+        "sample",
+        "this is an event being fired on the (emit-an-event) route. this event is for: " +
+          req.userDetails.fullName
+      );
+
+    res.send("event emitted");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("internal server error");
+  }
+});
+
 router.get("/quiz/:quizNumber", async function (req, res, next) {
   const { quizNumber: questionNumber } = req.params;
   const quiz = await quizModel.findOne(

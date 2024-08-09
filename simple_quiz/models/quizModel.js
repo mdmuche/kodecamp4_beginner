@@ -37,11 +37,6 @@ const quizSchema = new mongoose.Schema(
       enum: ["optionA", "optionB", "optionC", "optionD"],
       required: true,
     },
-    role: {
-      type: String,
-      enum: ["user", "admin"],
-      default: "user",
-    },
   },
   { timestamps: true }
 );
