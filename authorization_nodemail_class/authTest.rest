@@ -2,8 +2,8 @@ POST  http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "fullName": "abula experience",
-    "email": "abulachizor@gmail.com",
+    "fullName": "abula martins",
+    "email": "abulamartins@gmail.com",
     "password": "test123"
 }
 

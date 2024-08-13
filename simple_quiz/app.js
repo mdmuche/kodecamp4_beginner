@@ -6,6 +6,7 @@ var logger = require("morgan");
 const mongoose = require("mongoose");
 const cloudinary = require("cloudinary");
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 require("dotenv").config();
 var http = require("http");
 const { Server } = require("socket.io");
@@ -115,6 +116,11 @@ mongoose
     console.log("an error occured", err);
   });
 
+app.use(
+  cors({
+    origin: process.env.WHITELIST,
+  })
+);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

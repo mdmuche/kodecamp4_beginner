@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      body {
+        width: 100%;
+        height: 100vh;
+      }
+
+      main {
+        width: 100%;
+      }
+
+      main > h1 > span {
+        color: red;
+      }
+    </style>
+
+    <main></main>
+
+    <script>
+      const main = document.querySelector("main");
+      async function dashBoard() {
+        const response = await fetch(
+          "http://localhost:3000/v1/shared/profile",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: sessionStorage.getItem("token"),
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        // console.log(data);
+
+        if (response.status == 200) {
+          main.innerHTML = `
+             <h1>welcome, <span>${data.fullName}</span></h1>
+             <div>${data.email}</div>
+          `;
+        }
+      }
+      dashBoard();
+    </script>
+  </body>
+</html>

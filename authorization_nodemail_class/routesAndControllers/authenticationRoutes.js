@@ -53,13 +53,17 @@ authRouter.get("/verify-email/:token", async (req, res) => {
     return;
   }
 
-  await userModel.findOneAndUpdate({
-    authToken: token,
-    authPurpose: "verify-email",
-    isEmailVerified: true,
-    authToken: "",
-    authPurpose: "",
-  });
+  await userModel.findOneAndUpdate(
+    {
+      authToken: token,
+      authPurpose: "verify-email",
+    },
+    {
+      isEmailVerified: true,
+      authToken: "",
+      authPurpose: "",
+    }
+  );
 
   res.send({
     isSuccessful: true,
